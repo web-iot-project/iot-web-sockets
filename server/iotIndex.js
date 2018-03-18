@@ -1,7 +1,11 @@
 const express = require ('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
-
+const http = require("http")
+const socketIo = require("socket.io")
+const app = express();
+const server = http.createServer(app)
+const io = socketIo(server)
 
 
 const port = 3456
@@ -9,13 +13,13 @@ const port = 3456
 // I'm still moving forward with this project though. Just a dfferent way of organizing the project.
 
 
-const app = express();
+
 app.use(cors())
-app.use(bodyParser(json()))
+app.use(bodyParser.json())
 
 
 
 
-app.listen(port, ()=> `Listening on port: ${port}`)
+app.listen(port, ()=> console.log(`Listening on port: ${port}`))
 
 
