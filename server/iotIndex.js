@@ -20,7 +20,7 @@ io.on("connection", socket => {
     if (interval) {
         clearInterval(interval);
       }
-  intervalId = setInterval(() => getApiAndEmit(socket), 5000)
+  intervalId = setInterval(() => getApiAndEmit(socket), 500)
 
   socket.on("disconnect", () => {
     console.log("Client disconnected")
@@ -28,7 +28,7 @@ io.on("connection", socket => {
   })
 })
 
-const lightOn = true;
+
 
 const getApiAndEmit = async socket => {
   try {
@@ -41,9 +41,22 @@ const getApiAndEmit = async socket => {
 }
 
 
+let lightOn = false;
 
+app.post('/api/forward', (req, res)=>{
+if (req.query.button.toLowerCase() === 'w'){
+  lightOn = true;
+  res.status(200).json('Nothing')
+  console.log("turn on")
+}
 
+})
 
+app.get('/api/stop', (req, res) => {
+  lightOn = false
+  res.status(200).json('Nothing')
+  console.log("turn off")
+})
 
 
 
