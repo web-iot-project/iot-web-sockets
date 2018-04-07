@@ -44,12 +44,12 @@ const getApiAndEmit = async socket => {
 let lightOn = false;
 
 app.post('/api/forward', (req, res)=>{
-if (req.query.button.toLowerCase() === 'w'){
-  lightOn = true;
+  const {button} = req.query
+if (button.toLowerCase() === 'w' || button.toLowerCase() === 'a' || button.toLowerCase() === 'd'){
+  lightOn = req.query.button.toLowerCase();
   res.status(200).json('Nothing')
   console.log("turn on")
 }
-
 })
 
 app.get('/api/stop', (req, res) => {
